@@ -13,7 +13,6 @@
     :root { --brand: #123047; --brand-2: #1e4a6b; --brand-3: #2e6188; }
 
     * { box-sizing: border-box; }
-
     html, body { height: 100%; }
 
     body {
@@ -22,24 +21,19 @@
       font-family: Arial, Helvetica, sans-serif;
       display: flex;
       flex-direction: column;
-      min-height: 100dvh;          /* 100dvh: đúng khi thanh địa chỉ mobile ẩn/hiện */
+      min-height: 100dvh;
     }
 
     /* ---------- HEADER ---------- */
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; flex-wrap: wrap;
       padding: 12px 16px;
-      background: var(--brand);
-      color: #fff;
-      padding-top: calc(12px + env(safe-area-inset-top));         /* tai thỏ iPhone */
+      padding-top: calc(12px + env(safe-area-inset-top));
       padding-left: calc(16px + env(safe-area-inset-left));
       padding-right: calc(16px + env(safe-area-inset-right));
+      background: var(--brand); color: #fff;
     }
-
     header h1 { margin: 0; font-size: 19px; line-height: 1.25; }
     header .sub { margin: 3px 0 0; font-size: 12px; opacity: 0.78; }
 
@@ -47,64 +41,71 @@
 
     .btn {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 9px 13px; border-radius: 8px;
-      font-size: 13px; text-decoration: none; cursor: pointer;
+      padding: 9px 13px; border-radius: 8px; font-size: 13px;
+      text-decoration: none; cursor: pointer; text-align: center;
       background: var(--brand-2); color: #e3f1ff;
       border: 1px solid var(--brand-3);
-      white-space: nowrap;
-      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap; -webkit-tap-highlight-color: transparent;
     }
     .btn:hover { background: #256a94; }
     .btn.ghost { background: transparent; color: #cfe6ff; }
+    .btn.primary { background: #0f7a3d; border-color: #16a34a; color: #fff; font-weight: bold; }
+    .btn.primary:hover { background: #128f47; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
 
-    /* ---------- NỘI DUNG ---------- */
-    main {
-      flex: 1 1 auto;
-      padding: 10px;
-      min-height: 55vh;
-      display: flex;
+    /* ---------- CẢNH BÁO ---------- */
+    .warn {
+      display: none;
+      margin: 10px 12px 0;
+      padding: 10px 12px;
+      background: #fff4e5; border: 1px solid #f0c48a; border-radius: 8px;
+      color: #7a4a06; font-size: 13px; line-height: 1.45;
     }
+    .warn.show { display: block; }
+
+    /* ---------- THẺ HƯỚNG DẪN ---------- */
+    main {
+      flex: 1 1 auto; padding: 10px; min-height: 55vh;
+      display: flex; flex-direction: column;
+    }
+
+    .card {
+      background: #fff; border-radius: 10px; padding: 20px 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      max-width: 560px; margin: 8px auto; width: 100%;
+      font-size: 14px; color: #1d3c56; line-height: 1.55;
+    }
+    .card h2 { margin: 0 0 10px; font-size: 17px; color: #123047; }
+    .card ol { margin: 0 0 14px; padding-left: 20px; }
+    .card li { margin-bottom: 9px; }
+    .card .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .card .small { font-size: 12px; color: #6b8299; margin-top: 12px; }
+
+    .frame-wrap { flex: 1 1 auto; display: none; }
+    .frame-wrap.show { display: flex; }
 
     iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      background: #fff;
-      border-radius: 10px;
+      display: block; width: 100%; height: 100%; border: 0;
+      background: #fff; border-radius: 10px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
-    }
-
-    .hint {
-      display: none;
-      padding: 8px 14px 0;
-      color: #43607a;
-      font-size: 12px;
-      line-height: 1.4;
     }
 
     footer {
       padding: 6px 16px calc(8px + env(safe-area-inset-bottom));
-      font-size: 11px;
-      color: #6b8299;
-      text-align: right;
+      font-size: 11px; color: #6b8299; text-align: right;
     }
 
-    /* ---------- MOBILE ---------- */
     @media (max-width: 640px) {
       header { padding: 10px 12px; gap: 8px; padding-top: calc(10px + env(safe-area-inset-top)); }
       header h1 { font-size: 16px; }
       header .sub { font-size: 11px; }
-      .btn { padding: 8px 11px; font-size: 12px; }
+      .btn { padding: 9px 12px; font-size: 13px; }
       main { padding: 6px; }
-      iframe { border-radius: 8px; }
-      .hint { display: block; }
+      .card { padding: 16px 14px; }
       footer { text-align: center; }
     }
 
-    /* Điện thoại nằm ngang: ưu tiên chỗ cho bảng, bỏ gợi ý */
     @media (orientation: landscape) and (max-height: 520px) {
-      .hint { display: none; }
       header h1 { font-size: 15px; }
       header .sub { display: none; }
     }
@@ -117,58 +118,100 @@
       <h1>BẢNG DOANH THU &amp; DÒNG TIỀN</h1>
       <p class="sub">Dữ liệu trực tiếp từ Excel Online · tự cập nhật 5 phút</p>
     </div>
-
     <div class="actions">
       <a class="btn" id="openExcel" target="_blank" rel="noopener">📊 Mở Excel đầy đủ ↗</a>
-      <button class="btn ghost" id="refresh" type="button">↻ Tải lại</button>
+      <button class="btn ghost" id="refresh" type="button" hidden>↻ Tải lại</button>
     </div>
   </header>
 
-  <p class="hint">📱 <b>Trên điện thoại:</b> xoay ngang để xem bảng rộng hơn · dùng 2 ngón để phóng to/thu nhỏ · nếu bảng khó thao tác, bấm <b>“Mở Excel đầy đủ”</b>.</p>
+  <div class="warn" id="webviewWarn">
+    ⚠️ Bạn đang mở trong <b>trình duyệt của ứng dụng</b> (Telegram / Zalo / Facebook) — Microsoft
+    <b>không cho đăng nhập</b> ở đây. Hãy bấm nút <b>⋯</b> (góc trên) → chọn <b>“Mở bằng trình duyệt”</b>
+    (Chrome / Safari) rồi làm lại từ đầu.
+  </div>
 
   <main>
-    <iframe
-      id="excelDashboard"
-      title="Dashboard doanh thu và dòng tiền"
-      loading="lazy"
-      allowfullscreen
-      src="https://vgsipile-my.sharepoint.com/personal/thanhthien_vgsipile_com/_layouts/15/Doc.aspx?sourcedoc={77d3dcab-5b28-41b6-8016-094a54b7ef2c}&action=embedview&wdAllowInteractivity=True&wdHideGridlines=True&wdHideHeaders=True&wdHideSheetTabs=True&wdDownloadButton=False&ActiveCell=Dashboard!A1">
-    </iframe>
+    <!-- Thẻ hướng dẫn: hiện trước, đăng nhập xong mới hiện bảng -->
+    <div class="card" id="guide">
+      <h2>🔐 Cần đăng nhập Microsoft trước</h2>
+      <p style="margin:0 0 12px">Để xem dữ liệu, làm đúng 2 bước (chỉ cần làm 1 lần, sau đó sẽ tự nhớ):</p>
+      <ol>
+        <li>Bấm <b>“Đăng nhập Microsoft”</b> → đăng nhập bằng tài khoản VGSI trong tab mới.</li>
+        <li>Đóng tab đó, quay lại đây và bấm <b>“Đã đăng nhập — Xem bảng”</b>.</li>
+      </ol>
+      <div class="row">
+        <a class="btn" id="loginBtn" target="_blank" rel="noopener">🔐 Đăng nhập Microsoft</a>
+        <button class="btn primary" id="showBtn" type="button">✅ Đã đăng nhập — Xem bảng</button>
+      </div>
+      <p class="small">
+        Nếu bảng vẫn trắng hoặc báo “Access denied”: mở lại nút <b>“Mở Excel đầy đủ ↗”</b> ở trên —
+        cách đó luôn hoạt động. Cần quyền truy cập file, liên hệ Mr Thiện.
+      </p>
+    </div>
+
+    <!-- Khung bảng: chỉ hiện sau khi bấm "Đã đăng nhập" -->
+    <div class="frame-wrap" id="frameWrap">
+      <iframe
+        id="excelDashboard"
+        title="Dashboard doanh thu và dòng tiền"
+        allowfullscreen
+        src="about:blank">
+      </iframe>
+    </div>
   </main>
 
-  <footer id="stamp">Đang tải…</footer>
+  <footer id="stamp"></footer>
 
   <script>
-    const EMBED_URL = "https://vgsipile-my.sharepoint.com/personal/thanhthien_vgsipile_com/_layouts/15/Doc.aspx?sourcedoc={77d3dcab-5b28-41b6-8016-094a54b7ef2c}&action=embedview&wdAllowInteractivity=True&wdHideGridlines=True&wdHideHeaders=True&wdHideSheetTabs=True&wdDownloadButton=False&ActiveCell=Dashboard!A1";
+    const DOC_URL = "https://vgsipile-my.sharepoint.com/personal/thanhthien_vgsipile_com/_layouts/15/Doc.aspx?sourcedoc={77d3dcab-5b28-41b6-8016-094a54b7ef2c}";
+    const EMBED_URL = DOC_URL + "&action=embedview&wdAllowInteractivity=True&wdHideGridlines=True&wdHideHeaders=True&wdHideSheetTabs=True&wdDownloadButton=False&ActiveCell=Dashboard!A1";
+    const OPEN_URL  = DOC_URL + "&action=view&wdAllowInteractivity=True&ActiveCell=Dashboard!A1";
 
-    const frame = document.getElementById("excelDashboard");
-    const stamp = document.getElementById("stamp");
+    const frame    = document.getElementById("excelDashboard");
+    const wrap     = document.getElementById("frameWrap");
+    const guide    = document.getElementById("guide");
+    const stamp    = document.getElementById("stamp");
+    const refresh  = document.getElementById("refresh");
+    const webview  = document.getElementById("webviewWarn");
 
-    // Nút "Mở Excel đầy đủ": mở bản Excel Online toàn trang (dễ thao tác trên mobile)
-    document.getElementById("openExcel").href = EMBED_URL;
+    // Nút đăng nhập + mở Excel: mở ở TAB MỚI (top-level) — cách duy nhất Microsoft cho đăng nhập
+    document.getElementById("loginBtn").href = OPEN_URL;
+    document.getElementById("openExcel").href = OPEN_URL;
 
-    function reloadFrame() {
-      const url = new URL(EMBED_URL);
-      url.searchParams.set("_refresh", Date.now());   // phá cache, lấy dữ liệu đã lưu mới nhất
-      frame.src = url.toString();
-      stamp.textContent = "Cập nhật lúc " + new Date().toLocaleTimeString("vi-VN");
+    // Cảnh báo nếu đang nằm trong WebView của app (Microsoft chặn login ở đây)
+    if (/Telegram|Zalo|FBAN|FBAV|FB_IAB|Messenger|Line|Instagram|wv\)/i.test(navigator.userAgent)) {
+      webview.classList.add("show");
     }
 
-    // Tự tải lại mỗi 5 phút
-    setInterval(reloadFrame, 5 * 60 * 1000);
+    let loaded = false;
+    function loadFrame() {
+      const u = new URL(EMBED_URL);
+      u.searchParams.set("_refresh", Date.now());   // phá cache
+      frame.src = u.toString();
+      guide.style.display = "none";
+      wrap.classList.add("show");
+      refresh.hidden = false;
+      stamp.textContent = "Cập nhật lúc " + new Date().toLocaleTimeString("vi-VN");
+      loaded = true;
+    }
 
-    document.getElementById("refresh").addEventListener("click", reloadFrame);
-
-    // Khi quay lại tab (điện thoại hay bị treo nền) → làm mới nếu đã quá 5 phút
-    let last = Date.now();
-    document.addEventListener("visibilitychange", () => {
-      if (!document.hidden && Date.now() - last > 5 * 60 * 1000) {
-        last = Date.now();
-        reloadFrame();
-      }
+    document.getElementById("showBtn").addEventListener("click", () => {
+      try { window.top.location === window.location; } catch (e) {}
+      loadFrame();
     });
 
-    window.addEventListener("load", () => { last = Date.now(); reloadFrame(); });
+    refresh.addEventListener("click", loadFrame);
+
+    // Tự làm mới 5 phút (chỉ khi đã hiện bảng)
+    setInterval(() => { if (loaded) loadFrame(); }, 5 * 60 * 1000);
+
+    // Quay lại tab sau khi đăng nhập → gợi ý bấm "Đã đăng nhập"
+    let last = Date.now();
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && loaded && Date.now() - last > 5 * 60 * 1000) {
+        last = Date.now(); loadFrame();
+      }
+    });
   </script>
 </body>
 </html>
