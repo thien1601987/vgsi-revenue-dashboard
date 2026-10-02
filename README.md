@@ -22,6 +22,16 @@ Repo không chứa số liệu doanh thu, công nợ hay bất kỳ dữ liệu 
 
 Chỉnh sửa trực tiếp trên file Excel (SharePoint) → dashboard tự hiển thị bản mới sau tối đa 5 phút, **không cần sửa code**.
 
+## Hiển thị trên laptop & điện thoại
+
+Trang đã được tối ưu **responsive**:
+- Chiều cao dùng `100dvh` → không bị lệch khi thanh địa chỉ mobile ẩn/hiện.
+- Header co lại, nút to hơn, chữ nhỏ hơn trên màn hình ≤ 640px.
+- Hỗ trợ **tai thỏ iPhone** (safe-area insets) và chế độ nằm ngang.
+- Nút **"Mở Excel đầy đủ ↗"** mở Excel Online toàn trang — cách thao tác dễ nhất trên điện thoại.
+- Nút **"↻ Tải lại"** + tự làm mới 5 phút một lần, và làm mới khi quay lại tab (mobile hay treo nền).
+- Có thể "Thêm vào màn hình chính" (Add to Home Screen) để dùng như app.
+
 ## Triển khai
 
 Trang tĩnh, không cần build. Có thể:
