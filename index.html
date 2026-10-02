@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard Doanh thu & Dòng tiền — VGSI PILE</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #eef3f8;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 18px 24px;
+      color: white;
+      background: #123047;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      opacity: 0.8;
+    }
+
+    header a.open-direct {
+      color: #cfe6ff;
+      font-size: 13px;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    .dashboard {
+      width: 100%;
+      height: calc(100vh - 82px);
+      padding: 12px;
+    }
+
+    .dashboard iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>BẢNG DOANH THU &amp; DÒNG TIỀN</h1>
+      <p>Dữ liệu trực tiếp từ Excel Online</p>
+    </div>
+    <a class="open-direct"
+       href="https://vgsipile-my.sharepoint.com/personal/thanhthien_vgsipile_com/_layouts/15/Doc.aspx?sourcedoc={77d3dcab-5b28-41b6-8016-094a54b7ef2c}&action=embedview&wdAllowInteractivity=True&wdHideGridlines=True&wdHideHeaders=True&wdHideSheetTabs=True&wdDownloadButton=False&ActiveCell=Dashboard!A1"
+       target="_blank" rel="noopener">Mở Excel trực tiếp ↗</a>
+  </header>
+
+  <main class="dashboard">
+    <iframe
+      id="excelDashboard"
+      title="Dashboard doanh thu và dòng tiền"
+      scrolling="no"
+      src="https://vgsipile-my.sharepoint.com/personal/thanhthien_vgsipile_com/_layouts/15/Doc.aspx?sourcedoc={77d3dcab-5b28-41b6-8016-094a54b7ef2c}&action=embedview&wdAllowInteractivity=True&wdHideGridlines=True&wdHideHeaders=True&wdHideSheetTabs=True&wdDownloadButton=False&ActiveCell=Dashboard!A1">
+    </iframe>
+  </main>
+
+  <script>
+    // Tải lại iframe mỗi 5 phút để lấy dữ liệu đã lưu mới nhất
+    setInterval(() => {
+      const frame = document.getElementById("excelDashboard");
+      const url = new URL(frame.src);
+
+      url.searchParams.set("_refresh", Date.now());
+      frame.src = url.toString();
+    }, 5 * 60 * 1000);
+  </script>
+</body>
+</html>
